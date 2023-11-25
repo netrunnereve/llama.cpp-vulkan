@@ -353,6 +353,9 @@ if (LLAMA_VULKAN)
         message(STATUS "Vulkan found")
 
         add_library(ggml-vulkan STATIC ggml-vulkan.cpp ggml-vulkan.h)
+        if (BUILD_SHARED_LIBS)
+            set_target_properties(ggml-vulkan PROPERTIES POSITION_INDEPENDENT_CODE ON)
+        endif()
         target_link_libraries(ggml-vulkan PUBLIC Vulkan::Vulkan)
 
         add_compile_definitions(GGML_USE_VULKAN)
